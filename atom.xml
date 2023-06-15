@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>LeiDaXian</title>
+  
+  
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2023-06-15T15:56:34.521Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>John Doe</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《关于电脑的网络适配器寄了的问题》</title>
+    <link href="http://example.com/2023/06/15/%E3%80%8A%E5%85%B3%E4%BA%8E%E7%94%B5%E8%84%91%E7%9A%84%E7%BD%91%E7%BB%9C%E9%80%82%E9%85%8D%E5%99%A8%E5%AF%84%E4%BA%86%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%8B/"/>
+    <id>http://example.com/2023/06/15/%E3%80%8A%E5%85%B3%E4%BA%8E%E7%94%B5%E8%84%91%E7%9A%84%E7%BD%91%E7%BB%9C%E9%80%82%E9%85%8D%E5%99%A8%E5%AF%84%E4%BA%86%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%8B/</id>
+    <published>2023-06-15T15:32:16.000Z</published>
+    <updated>2023-06-15T15:56:34.521Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://example.com/2023/06/14/hello-world/"/>
+    <id>http://example.com/2023/06/14/hello-world/</id>
+    <published>2023-06-14T11:28:34.223Z</published>
+    <updated>2023-06-14T10:10:52.054Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>
