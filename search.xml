@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>《关于我电脑突然网卡适配器寄了的问题》</title>
+      <link href="/2023/06/17/%E3%80%8A%E5%85%B3%E4%BA%8E%E6%88%91%E7%94%B5%E8%84%91%E7%AA%81%E7%84%B6%E7%BD%91%E5%8D%A1%E9%80%82%E9%85%8D%E5%99%A8%E6%95%85%E9%9A%9C%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%8B/"/>
+      <url>/2023/06/17/%E3%80%8A%E5%85%B3%E4%BA%8E%E6%88%91%E7%94%B5%E8%84%91%E7%AA%81%E7%84%B6%E7%BD%91%E5%8D%A1%E9%80%82%E9%85%8D%E5%99%A8%E6%95%85%E9%9A%9C%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%8B/</url>
+      
+        <content type="html"><![CDATA[<h3 id="6月27中午，我部电脑出现WiFi设置丢失，电脑的无线网卡寄了"><a href="#6月27中午，我部电脑出现WiFi设置丢失，电脑的无线网卡寄了" class="headerlink" title="6月27中午，我部电脑出现WiFi设置丢失，电脑的无线网卡寄了"></a>6月27中午，我部电脑出现WiFi设置丢失，电脑的无线网卡寄了</h3><h3 id="后面找到很多方法，大多数都不行，最后我还是依靠一个叫-cclean-professional-的软件进行修复"><a href="#后面找到很多方法，大多数都不行，最后我还是依靠一个叫-cclean-professional-的软件进行修复" class="headerlink" title="后面找到很多方法，大多数都不行，最后我还是依靠一个叫 cclean professional 的软件进行修复."></a>后面找到很多方法，大多数都不行，最后我还是依靠一个叫 <a href="https://www.ccleaner.com/">cclean professional</a> 的软件进行修复.</h3><img src="/images/2.png" alt="Image1" style="width:250px;height:300px;"><h2 id="可以直接白嫖14天免费的试用版进入注册表。扫描问题，全选，再按修复所选问题直接解决。"><a href="#可以直接白嫖14天免费的试用版进入注册表。扫描问题，全选，再按修复所选问题直接解决。" class="headerlink" title="可以直接白嫖14天免费的试用版进入注册表。扫描问题，全选，再按修复所选问题直接解决。"></a>可以直接白嫖14天免费的试用版进入注册表。扫描问题，全选，再按修复所选问题直接解决。</h2><img src="/images/1.png" alt="Image2" style="width:300px;height:300px;"><p>网上也有很多其他方法，可以先试一下：<br>1、window左下角右键，然后选择window（管理员），输入</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh winsock reset</span><br></pre></td></tr></table></figure><p>重启</p><p>2、设备管理器，打开网络适配器，找到wireless或者wi-fi 6的驱动，卸载设备，重启。</p><p>3、放静电法，拔掉电源、长安电源键关机重启</p><p>4、关机摇一摇电脑（）</p><p>我竟然这四个办法都试了，都不行，haha。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> PC </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>父亲节快乐！！！</title>
+      <link href="/2023/06/17/%E7%88%B6%E4%BA%B2%E8%8A%82%E5%BF%AB%E4%B9%90/"/>
+      <url>/2023/06/17/%E7%88%B6%E4%BA%B2%E8%8A%82%E5%BF%AB%E4%B9%90/</url>
+      
+        <content type="html"><![CDATA[<h3 id="用几个钟头搭建的博客先来做一份赛博贺卡，特此在这里祝福所有的老豆父亲爸爸们节日快乐，身体健康，工作顺利。"><a href="#用几个钟头搭建的博客先来做一份赛博贺卡，特此在这里祝福所有的老豆父亲爸爸们节日快乐，身体健康，工作顺利。" class="headerlink" title="用几个钟头搭建的博客先来做一份赛博贺卡，特此在这里祝福所有的老豆父亲爸爸们节日快乐，身体健康，工作顺利。"></a>用几个钟头搭建的博客先来做一份赛博贺卡，特此在这里祝福所有的老豆父亲爸爸们节日快乐，身体健康，工作顺利。</h3><h3 id="（赛博即为英语单词Cyber（网络）的音译）"><a href="#（赛博即为英语单词Cyber（网络）的音译）" class="headerlink" title="（赛博即为英语单词Cyber（网络）的音译）"></a>（赛博即为英语单词Cyber（网络）的音译）</h3><img src="/images/3.jpg" alt="父亲节快乐" style="width:300px;height:300px;"><img src="/images/4.jpg" alt="父亲节快乐" style="width:300px;height:300px;"><img src="/images/5.jpg"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">他不会给我太多承诺</span><br><span class="line">却总是默默守护着我</span><br><span class="line">为我打开一扇又一扇的门</span><br><span class="line">让我勇敢地迎接未来</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">老豆，父亲节快乐，Love，U.</span><br></pre></td></tr></table></figure><h3 id="如果觉得我做的很nice，可以奖励一下，hh。"><a href="#如果觉得我做的很nice，可以奖励一下，hh。" class="headerlink" title="如果觉得我做的很nice，可以奖励一下，hh。"></a>如果觉得我做的很nice，可以奖励一下，hh。</h3><img src="/images/6.jpg" alt="投喂" style="width:100px;height:100px;">]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 节日 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2023/06/17/hello-world/"/>
+      <url>/2023/06/17/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
