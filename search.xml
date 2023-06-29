@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>《关于我电脑突然网卡适配器寄了的问题》</title>
+      <link href="/2023/06/17/%E3%80%8A%E5%85%B3%E4%BA%8E%E6%88%91%E7%94%B5%E8%84%91%E7%AA%81%E7%84%B6%E7%BD%91%E5%8D%A1%E9%80%82%E9%85%8D%E5%99%A8%E6%95%85%E9%9A%9C%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%8B/"/>
+      <url>/2023/06/17/%E3%80%8A%E5%85%B3%E4%BA%8E%E6%88%91%E7%94%B5%E8%84%91%E7%AA%81%E7%84%B6%E7%BD%91%E5%8D%A1%E9%80%82%E9%85%8D%E5%99%A8%E6%95%85%E9%9A%9C%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%8B/</url>
+      
+        <content type="html"><![CDATA[<h3 id="6月27中午，我部电脑出现WiFi设置丢失，电脑的无线网卡寄了"><a href="#6月27中午，我部电脑出现WiFi设置丢失，电脑的无线网卡寄了" class="headerlink" title="6月27中午，我部电脑出现WiFi设置丢失，电脑的无线网卡寄了"></a>6月27中午，我部电脑出现WiFi设置丢失，电脑的无线网卡寄了</h3><h3 id="后面找到很多方法，大多数都不行，最后我还是依靠一个叫-cclean-professional-的软件进行修复"><a href="#后面找到很多方法，大多数都不行，最后我还是依靠一个叫-cclean-professional-的软件进行修复" class="headerlink" title="后面找到很多方法，大多数都不行，最后我还是依靠一个叫 cclean professional 的软件进行修复."></a>后面找到很多方法，大多数都不行，最后我还是依靠一个叫 <a href="https://www.ccleaner.com/">cclean professional</a> 的软件进行修复.</h3><img src="/images/2.png" alt="Image1" style="width:250px;height:300px;"><h2 id="可以直接白嫖14天免费的试用版进入注册表。扫描问题，全选，再按修复所选问题直接解决。"><a href="#可以直接白嫖14天免费的试用版进入注册表。扫描问题，全选，再按修复所选问题直接解决。" class="headerlink" title="可以直接白嫖14天免费的试用版进入注册表。扫描问题，全选，再按修复所选问题直接解决。"></a>可以直接白嫖14天免费的试用版进入注册表。扫描问题，全选，再按修复所选问题直接解决。</h2><img src="/images/1.png" alt="Image2" style="width:300px;height:300px;"><p>网上也有很多其他方法，可以先试一下：<br>1、window左下角右键，然后选择window（管理员），输入</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh winsock reset</span><br></pre></td></tr></table></figure><p>重启</p><p>2、设备管理器，打开网络适配器，找到wireless或者wi-fi 6的驱动，卸载设备，重启。</p><p>3、放静电法，拔掉电源、长安电源键关机重启</p><p>4、关机摇一摇电脑（）</p><p>我竟然这四个办法都试了，都不行，haha。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> PC </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>父亲节快乐！！！</title>
       <link href="/2023/06/17/%E7%88%B6%E4%BA%B2%E8%8A%82%E5%BF%AB%E4%B9%90/"/>
       <url>/2023/06/17/%E7%88%B6%E4%BA%B2%E8%8A%82%E5%BF%AB%E4%B9%90/</url>
@@ -21,25 +40,6 @@
         <tags>
             
             <tag> 节日 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>《关于我电脑突然网卡适配器寄了的问题》</title>
-      <link href="/2023/06/17/%E3%80%8A%E5%85%B3%E4%BA%8E%E6%88%91%E7%94%B5%E8%84%91%E7%AA%81%E7%84%B6%E7%BD%91%E5%8D%A1%E9%80%82%E9%85%8D%E5%99%A8%E6%95%85%E9%9A%9C%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%8B/"/>
-      <url>/2023/06/17/%E3%80%8A%E5%85%B3%E4%BA%8E%E6%88%91%E7%94%B5%E8%84%91%E7%AA%81%E7%84%B6%E7%BD%91%E5%8D%A1%E9%80%82%E9%85%8D%E5%99%A8%E6%95%85%E9%9A%9C%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%8B/</url>
-      
-        <content type="html"><![CDATA[<h3 id="6月27中午，我部电脑出现WiFi设置丢失，电脑的无线网卡寄了"><a href="#6月27中午，我部电脑出现WiFi设置丢失，电脑的无线网卡寄了" class="headerlink" title="6月27中午，我部电脑出现WiFi设置丢失，电脑的无线网卡寄了"></a>6月27中午，我部电脑出现WiFi设置丢失，电脑的无线网卡寄了</h3><h3 id="后面找到很多方法，大多数都不行，最后我还是依靠一个叫-cclean-professional-的软件进行修复"><a href="#后面找到很多方法，大多数都不行，最后我还是依靠一个叫-cclean-professional-的软件进行修复" class="headerlink" title="后面找到很多方法，大多数都不行，最后我还是依靠一个叫 cclean professional 的软件进行修复."></a>后面找到很多方法，大多数都不行，最后我还是依靠一个叫 <a href="https://www.ccleaner.com/">cclean professional</a> 的软件进行修复.</h3><img src="/images/2.png" alt="Image1" style="width:250px;height:300px;"><h2 id="可以直接白嫖14天免费的试用版进入注册表。扫描问题，全选，再按修复所选问题直接解决。"><a href="#可以直接白嫖14天免费的试用版进入注册表。扫描问题，全选，再按修复所选问题直接解决。" class="headerlink" title="可以直接白嫖14天免费的试用版进入注册表。扫描问题，全选，再按修复所选问题直接解决。"></a>可以直接白嫖14天免费的试用版进入注册表。扫描问题，全选，再按修复所选问题直接解决。</h2><img src="/images/1.png" alt="Image2" style="width:300px;height:300px;"><p>网上也有很多其他方法，可以先试一下：<br>1、window左下角右键，然后选择window（管理员），输入</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh winsock reset</span><br></pre></td></tr></table></figure><p>重启</p><p>2、设备管理器，打开网络适配器，找到wireless或者wi-fi 6的驱动，卸载设备，重启。</p><p>3、放静电法，拔掉电源、长安电源键关机重启</p><p>4、关机摇一摇电脑（）</p><p>我竟然这四个办法都试了，都不行，haha。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> PC </tag>
             
         </tags>
       
