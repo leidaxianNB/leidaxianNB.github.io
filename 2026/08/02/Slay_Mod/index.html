@@ -1,0 +1,462 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>杀戮尖塔2 模组开发笔记 —— 自定义卡牌 | 雷大仙的小家</title><meta name="author" content="雷大仙"><meta name="copyright" content="雷大仙"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="杀戮尖塔2 模组开发：自定义卡牌从环境搭建到打包验证">
+<meta property="og:type" content="article">
+<meta property="og:title" content="杀戮尖塔2 模组开发笔记 —— 自定义卡牌">
+<meta property="og:url" content="https://www.leidaxiannb.cloudns.ch/2026/08/02/Slay_Mod/index.html">
+<meta property="og:site_name" content="雷大仙的小家">
+<meta property="og:description" content="杀戮尖塔2 模组开发：自定义卡牌从环境搭建到打包验证">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.leidaxiannb.cloudns.ch/img/covers/cover-11.webp">
+<meta property="article:published_time" content="2026-08-02T15:41:55.000Z">
+<meta property="article:modified_time" content="2026-10-18T10:00:17.764Z">
+<meta property="article:author" content="雷大仙">
+<meta property="article:tag" content="杀戮尖塔2">
+<meta property="article:tag" content="模组开发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.leidaxiannb.cloudns.ch/img/covers/cover-11.webp"><link rel="shortcut icon" href="/img/lei.png"><link rel="canonical" href="https://www.leidaxiannb.cloudns.ch/2026/08/02/Slay_Mod/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":230},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"You have switched to Traditional Chinese","cht_to_chs":"You have switched to Simplified Chinese","day_to_night":"You have switched to Dark Mode","night_to_day":"You have switched to Light Mode","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"top-right"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '杀戮尖塔2 模组开发笔记 —— 自定义卡牌',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-10-18 18:00:17'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/readPercent.css"><meta name="generator" content="Hexo 7.1.1"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://leidaxian-images.pages.dev/file/44aabeb026c8e50d3b52e.gif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/software/"><i class="fa-fw fas fa-laptop"></i><span> 软件</span></a></li><li><a class="site-page child" href="/wheel/"><i class="fa-fw fas fa-dice-d20"></i><span> 转盘</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/covers/cover-11.webp')"><nav id="nav"><span id="blog-info"><a href="/" title="雷大仙的小家"><span class="site-name">雷大仙的小家</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/software/"><i class="fa-fw fas fa-laptop"></i><span> 软件</span></a></li><li><a class="site-page child" href="/wheel/"><i class="fa-fw fas fa-dice-d20"></i><span> 转盘</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">杀戮尖塔2 模组开发笔记 —— 自定义卡牌</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-08-02T15:41:55.000Z" title="Created 2026-08-02 23:41:55">2026-08-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-10-18T10:00:17.764Z" title="Updated 2026-10-18 18:00:17">2026-10-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="杀戮尖塔2 模组开发笔记 —— 自定义卡牌"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">Comments:</span><a href="/2026/08/02/Slay_Mod/#post-comment"><span class="waline-comment-count" data-path="/2026/08/02/Slay_Mod/"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="杀戮尖塔2-模组开发笔记-——-自定义卡牌"><a href="#杀戮尖塔2-模组开发笔记-——-自定义卡牌" class="headerlink" title="杀戮尖塔2 模组开发笔记 —— 自定义卡牌"></a>杀戮尖塔2 模组开发笔记 —— 自定义卡牌</h1><h2 id="1-环境准备"><a href="#1-环境准备" class="headerlink" title="1. 环境准备"></a>1. 环境准备</h2><h3 id="1-1-开发工具"><a href="#1-1-开发工具" class="headerlink" title="1.1 开发工具"></a>1.1 开发工具</h3><ul>
+<li><strong>IDE</strong>：JetBrains Rider 或 Visual Studio（推荐 Rider，对 Godot 支持较好）。</li>
+<li><strong>引擎</strong>：Godot 4.x（.NET 版本），用于编辑资源和打包 <code>.pck</code>。</li>
+<li><strong>SDK</strong>：.NET 9.0（与游戏版本匹配，查看游戏目录下的 <code>Sts2.runtimeconfig.json</code>）。</li>
+<li><strong>游戏</strong>：杀戮尖塔2（Steam 版），确保能正常启动。</li>
+</ul>
+<h3 id="1-2-项目结构"><a href="#1-2-项目结构" class="headerlink" title="1.2 项目结构"></a>1.2 项目结构</h3><p>建议使用社区模板（如 <code>STS2.RitsuLib.ModTemplate</code>）快速创建项目，标准结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">YourMod/</span><br><span class="line">├── mod.json                      # 模组元数据</span><br><span class="line">├── localization/                 # 本地化文本</span><br><span class="line">│   └── zh-CN/</span><br><span class="line">│       ├── cards.json</span><br><span class="line">│       └── powers.json</span><br><span class="line">├── images/                       # 卡牌/能力图标</span><br><span class="line">│   ├── packed/</span><br><span class="line">│   │   └── card_portraits/</span><br><span class="line">│   │       └── &lt;卡池名&gt;/         # 如 colorless, silent, ironclad 等</span><br><span class="line">│   │           └── &lt;卡牌ID小写&gt;.png</span><br><span class="line">│   └── atlases/</span><br><span class="line">│       └── card_atlas.sprites/</span><br><span class="line">│           └── &lt;卡池名&gt;/</span><br><span class="line">│               └── &lt;卡牌ID小写&gt;.tres</span><br><span class="line">├── scripts/                      # C# 源文件</span><br><span class="line">│   ├── Cards/</span><br><span class="line">│   │   └── MyCard.cs</span><br><span class="line">│   └── Powers/</span><br><span class="line">│       └── MyBuff.cs</span><br><span class="line">└── YourMod.csproj</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-引用依赖"><a href="#1-3-引用依赖" class="headerlink" title="1.3 引用依赖"></a>1.3 引用依赖</h3><ul>
+<li>添加对游戏核心 DLL 的引用（<code>MegaCrit.Sts2.Core.dll</code>、<code>MegaCrit.Sts2.Godot.dll</code> 等）。</li>
+<li>添加 <code>GodotSharp.dll</code>（来自 Godot 安装目录）。</li>
+</ul>
+<hr>
+<h2 id="2-卡牌制作步骤"><a href="#2-卡牌制作步骤" class="headerlink" title="2. 卡牌制作步骤"></a>2. 卡牌制作步骤</h2><h3 id="2-1-定义卡牌类"><a href="#2-1-定义卡牌类" class="headerlink" title="2.1 定义卡牌类"></a>2.1 定义卡牌类</h3><p>新建 C# 文件，继承 <code>CardModel</code>，并放在合适的命名空间（推荐 <code>YourMod.Cards</code>）。</p>
+<p><strong>必需成员</strong>：</p>
+<ul>
+<li>**<code>CanonicalVars</code>**：定义卡牌的动态变量（伤害、格挡、力量层数等），使用 <code>List&lt;DynamicVar&gt;</code>。</li>
+<li><strong>构造函数</strong>：指定费用、类型、稀有度、目标。</li>
+<li>**<code>OnPlay</code>**：打出时的异步逻辑（造成伤害、施加能力、抽牌等）。</li>
+<li>**<code>OnUpgrade</code>**（可选）：升级时修改 <code>CanonicalVars</code> 中的数值。</li>
+</ul>
+<p><strong>卡牌类型枚举</strong>：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="built_in">enum</span> CardType &#123; None, Attack, Skill, Power, Status, Curse, Quest &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>稀有度枚举</strong>：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="built_in">enum</span> CardRarity &#123; None, Basic, Common, Uncommon, Rare, Ancient, Event, Token, Status, Curse, Quest &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>目标类型枚举</strong>：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="built_in">enum</span> TargetType &#123; None, Self, AnyEnemy, AllEnemies, RandomEnemy, AnyPlayer, AnyAlly, AllAllies, TargetedNoCreature, Osty &#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="示例1：攻击牌（造成伤害并抽牌）"><a href="#示例1：攻击牌（造成伤害并抽牌）" class="headerlink" title="示例1：攻击牌（造成伤害并抽牌）"></a>示例1：攻击牌（造成伤害并抽牌）</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> System.Threading.Tasks;</span><br><span class="line"><span class="keyword">using</span> MegaCrit.Sts2.Core.Commands;</span><br><span class="line"><span class="keyword">using</span> MegaCrit.Sts2.Core.Entities.Cards;</span><br><span class="line"><span class="keyword">using</span> MegaCrit.Sts2.Core.GameActions.Multiplayer;</span><br><span class="line"><span class="keyword">using</span> MegaCrit.Sts2.Core.Localization.DynamicVars;</span><br><span class="line"><span class="keyword">using</span> MegaCrit.Sts2.Core.Models.Cards;</span><br><span class="line"><span class="keyword">using</span> MegaCrit.Sts2.Core.ValueProps;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">YourMod.Cards</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="title">MyAttackCard</span> : <span class="title">CardModel</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">protected</span> <span class="keyword">override</span> List&lt;DynamicVar&gt; CanonicalVars =&gt; <span class="keyword">new</span>()</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">new</span> DamageVar(<span class="number">6</span>m, ValueProp.Move) <span class="comment">// 6点基础伤害</span></span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">MyAttackCard</span>() : <span class="title">base</span>(<span class="params"><span class="number">1</span>, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy</span>)</span> &#123; &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">async</span> Task <span class="title">OnPlay</span>(<span class="params">PlayerChoiceContext choiceContext, CardPlay cardPlay</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">await</span> DamageCmd.Attack(DynamicVars.Damage.BaseValue)</span><br><span class="line">                .FromCard(<span class="keyword">this</span>)</span><br><span class="line">                .Targeting(cardPlay.Target)</span><br><span class="line">                .WithHitFx(<span class="string">&quot;vfx/vfx_attack_slash&quot;</span>)</span><br><span class="line">                .Execute(choiceContext);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">await</span> CardPileCmd.Draw(choiceContext, <span class="number">1</span>, Owner);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnUpgrade</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            DynamicVars.Damage.UpgradeValueBy(<span class="number">3</span>m); <span class="comment">// 升级伤害+3</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="示例2：能力牌-Buff（每抽一张牌加力量）"><a href="#示例2：能力牌-Buff（每抽一张牌加力量）" class="headerlink" title="示例2：能力牌 + Buff（每抽一张牌加力量）"></a>示例2：能力牌 + Buff（每抽一张牌加力量）</h4><p><strong>Buff 类</strong>：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Threading.Tasks;</span><br><span class="line"><span class="keyword">using</span> MegaCrit.Sts2.Core.Commands;</span><br><span class="line"><span class="keyword">using</span> MegaCrit.Sts2.Core.Entities.Powers;</span><br><span class="line"><span class="keyword">using</span> MegaCrit.Sts2.Core.GameActions.Multiplayer;</span><br><span class="line"><span class="keyword">using</span> MegaCrit.Sts2.Core.Models.Powers;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">YourMod.Powers</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="title">StrengthOnDrawBuff</span> : <span class="title">PowerModel</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">override</span> PowerType Type =&gt; PowerType.Buff;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">override</span> PowerStackType StackType =&gt; PowerStackType.Counter;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 注意：方法签名必须与基类匹配，参数为 (PlayerChoiceContext, CardModel, bool)</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">async</span> Task <span class="title">AfterCardDrawn</span>(<span class="params">PlayerChoiceContext context, CardModel card, <span class="built_in">bool</span> fromHandDraw</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!fromHandDraw &amp;&amp; card.Owner.Creature == Owner &amp;&amp; Owner.CombatState.CurrentSide == Owner.Side)</span><br><span class="line">            &#123;</span><br><span class="line">                Flash();</span><br><span class="line">                <span class="keyword">await</span> PowerCmd.Apply&lt;StrengthPower&gt;(context, Owner, Amount, Owner, <span class="literal">null</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>能力牌类</strong>：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> System.Threading.Tasks;</span><br><span class="line"><span class="keyword">using</span> MegaCrit.Sts2.Core.Commands;</span><br><span class="line"><span class="keyword">using</span> MegaCrit.Sts2.Core.Entities.Cards;</span><br><span class="line"><span class="keyword">using</span> MegaCrit.Sts2.Core.GameActions.Multiplayer;</span><br><span class="line"><span class="keyword">using</span> MegaCrit.Sts2.Core.Localization.DynamicVars;</span><br><span class="line"><span class="keyword">using</span> MegaCrit.Sts2.Core.Models.Cards;</span><br><span class="line"><span class="keyword">using</span> MegaCrit.Sts2.Core.Models.Powers;</span><br><span class="line"><span class="keyword">using</span> YourMod.Powers;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">YourMod.Cards</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="title">StrengthDrawCard</span> : <span class="title">CardModel</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">protected</span> <span class="keyword">override</span> List&lt;DynamicVar&gt; CanonicalVars =&gt; <span class="keyword">new</span>()</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">new</span> PowerVar&lt;StrengthOnDrawBuff&gt;(<span class="number">1</span>m) <span class="comment">// 初始层数</span></span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">StrengthDrawCard</span>() : <span class="title">base</span>(<span class="params"><span class="number">1</span>, CardType.Power, CardRarity.Rare, TargetType.Self</span>)</span> &#123; &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">async</span> Task <span class="title">OnPlay</span>(<span class="params">PlayerChoiceContext choiceContext, CardPlay cardPlay</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">await</span> PowerCmd.Apply&lt;StrengthOnDrawBuff&gt;(</span><br><span class="line">                choiceContext,</span><br><span class="line">                Owner.Creature,</span><br><span class="line">                DynamicVars.StrengthOnDrawBuff.BaseValue,</span><br><span class="line">                Owner.Creature,</span><br><span class="line">                <span class="keyword">this</span></span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">await</span> CardPileCmd.Draw(choiceContext, <span class="number">1</span>, Owner);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnUpgrade</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            DynamicVars.StrengthOnDrawBuff.UpgradeValueBy(<span class="number">1</span>m); <span class="comment">// 升级层数+1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-2-本地化"><a href="#2-2-本地化" class="headerlink" title="2.2 本地化"></a>2.2 本地化</h3><p><strong>路径</strong>：<code>res://&lt;模组ID&gt;/localization/zh-CN/cards.json</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;MY_ATTACK_CARD.title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;我的攻击牌&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;MY_ATTACK_CARD.description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;造成 &#123;Damage:diff()&#125; 点伤害，抽1张牌。&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>&#123;变量名:diff()&#125;</code> 会自动显示升级后的数值。</li>
+</ul>
+<p><strong>Buff 本地化</strong>（<code>powers.json</code>）：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;STRENGTH_ON_DRAW_BUFF.title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;力量印记&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;STRENGTH_ON_DRAW_BUFF.smartDescription&quot;</span><span class="punctuation">:</span> <span class="string">&quot;每当你抽一张牌，获得 &#123;Amount&#125; 点[gold]力量[/gold]。&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-3-卡牌图标"><a href="#2-3-卡牌图标" class="headerlink" title="2.3 卡牌图标"></a>2.3 卡牌图标</h3><p><strong>大图</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res://images/packed/card_portraits/&lt;卡池&gt;/&lt;卡牌ID小写&gt;.png</span><br></pre></td></tr></table></figure>
+
+<p><strong>裁切纹理（.tres）</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res://images/atlases/card_atlas.sprites/&lt;卡池&gt;/&lt;卡牌ID小写&gt;.tres</span><br></pre></td></tr></table></figure>
+
+<p><strong>卡池名称对照</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>卡池</th>
+<th>目录名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>无色</td>
+<td><code>colorless</code></td>
+</tr>
+<tr>
+<td>静默猎手</td>
+<td><code>silent</code></td>
+</tr>
+<tr>
+<td>铁甲战士</td>
+<td><code>ironclad</code></td>
+</tr>
+<tr>
+<td>故障机器人</td>
+<td><code>defect</code></td>
+</tr>
+<tr>
+<td>亡灵契约师</td>
+<td><code>necrobinder</code></td>
+</tr>
+<tr>
+<td>储君</td>
+<td><code>regent</code></td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>图片推荐分辨率</strong>：1000×760。</li>
+<li><strong>.tres 文件</strong>：在 Godot 中创建 <code>AtlasTexture</code>，引用上述 PNG 图片。</li>
+</ul>
+<hr>
+<h3 id="2-4-注册卡牌"><a href="#2-4-注册卡牌" class="headerlink" title="2.4 注册卡牌"></a>2.4 注册卡牌</h3><p>在 <code>ModInitializer.cs</code> 中调用 <code>ModHelper.AddModelToPool</code>：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 无色卡池（通用）</span></span><br><span class="line">ModHelper.AddModelToPool(<span class="keyword">typeof</span>(ColorlessCardPool), <span class="keyword">typeof</span>(MyAttackCard));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 猎人卡池</span></span><br><span class="line">ModHelper.AddModelToPool(<span class="keyword">typeof</span>(SilentCardPool), <span class="keyword">typeof</span>(MyAttackCard));</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="3-关键易错点（避坑指南）"><a href="#3-关键易错点（避坑指南）" class="headerlink" title="3. 关键易错点（避坑指南）"></a>3. 关键易错点（避坑指南）</h2><table>
+<thead>
+<tr>
+<th>常见错误</th>
+<th>原因</th>
+<th>解决方案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>无法解析符号 &#39;CardModel&#39;</code></strong></td>
+<td>缺少 <code>using MegaCrit.Sts2.Core.Models.Cards;</code> 或未引用游戏 DLL。</td>
+<td>添加 using 并检查项目引用。</td>
+</tr>
+<tr>
+<td><strong><code>没有要重写的合适方法</code></strong></td>
+<td>基类中没有该方法，或方法签名（参数）不匹配。</td>
+<td>查阅官方示例或反编译确认正确的方法名（如 <code>AfterCardDrawn</code> 有 <code>bool fromHandDraw</code> 参数）。</td>
+</tr>
+<tr>
+<td><strong><code>ValueProp</code> 找不到</strong></td>
+<td>缺少 <code>using MegaCrit.Sts2.Core.ValueProps;</code>。</td>
+<td>添加该 using。</td>
+</tr>
+<tr>
+<td><strong><code>ThrowingPlayerChoiceContext</code> 找不到</strong></td>
+<td>缺少 <code>using MegaCrit.Sts2.Core.GameActions.Multiplayer;</code>。</td>
+<td>添加该 using。</td>
+</tr>
+<tr>
+<td><strong>动态变量升级无效</strong></td>
+<td><code>OnUpgrade</code> 中未正确调用 <code>UpgradeValueBy</code>，或访问了错误的变量名。</td>
+<td>使用属性访问（如 <code>DynamicVars.Damage</code>）或索引访问（<code>DynamicVars[&quot;Damage&quot;]</code>），确保名称一致。</td>
+</tr>
+<tr>
+<td><strong>卡牌不显示在百科&#x2F;卡池</strong></td>
+<td>本地化文件缺失、图片路径错误、未注册到正确卡池、模组未启用。</td>
+<td>检查 <code>cards.json</code>、图片路径、注册代码，重启游戏或开新档。</td>
+</tr>
+<tr>
+<td><strong>Buff 不触发</strong></td>
+<td>事件回调方法名错误、条件判断不通过、未调用 <code>Flash()</code> 或未正确传递 <code>Amount</code>。</td>
+<td>对照官方 <code>SpeedsterPower</code> 或 <code>DemonFormPower</code> 检查方法签名和条件。</td>
+</tr>
+<tr>
+<td><strong>图片不显示</strong></td>
+<td><code>.tres</code> 内部路径指向错误图片、图片格式&#x2F;尺寸异常、文件名大小写不一致。</td>
+<td>用文本编辑器检查 <code>.tres</code> 中的 <code>path</code>，确保指向正确的 PNG，且与卡池文件夹匹配。</td>
+</tr>
+<tr>
+<td><strong><code>PowerCmd.Apply</code> 报类型转换错误</strong></td>
+<td>目标&#x2F;来源参数不是 <code>Creature</code> 类型。</td>
+<td>使用 <code>base.Owner.Creature</code>（玩家）或 <code>base.Creature</code>（怪物自身）代替 <code>this</code>。</td>
+</tr>
+<tr>
+<td><strong><code>base.DynamicVars[&quot;Key&quot;]</code> 与 <code>.Key</code> 混淆</strong></td>
+<td>属性访问（<code>.Strength</code>）和索引访问（<code>[&quot;StrengthPower&quot;]</code>）键名不同。</td>
+<td>检查 <code>CanonicalVars</code> 中定义的泛型类型名，使用对应的访问方式。</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="4-测试与调试技巧"><a href="#4-测试与调试技巧" class="headerlink" title="4. 测试与调试技巧"></a>4. 测试与调试技巧</h2><ul>
+<li><strong>控制台命令</strong>（需启用 DevConsole Mod）：<ul>
+<li>获取卡牌：<code>card &lt;卡牌ID&gt;</code></li>
+<li>测试 Buff：<code>power &lt;BuffID&gt; &lt;层数&gt; &lt;目标索引&gt;</code>（<code>0</code> 为玩家）</li>
+</ul>
+</li>
+<li><strong>日志输出</strong>：使用 <code>Log.Info(&quot;消息&quot;)</code> 在控制台打印调试信息。</li>
+<li><strong>断点调试</strong>：Rider 支持附加到 Godot 进程，可对 Mod 代码断点调试。</li>
+</ul>
+<hr>
+<h2 id="5-常用命令速查"><a href="#5-常用命令速查" class="headerlink" title="5. 常用命令速查"></a>5. 常用命令速查</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 造成伤害</span></span><br><span class="line"><span class="keyword">await</span> DamageCmd.Attack(伤害值).FromCard(<span class="keyword">this</span>).Targeting(目标).Execute(context);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 施加能力（Buff）</span></span><br><span class="line"><span class="keyword">await</span> PowerCmd.Apply&lt;能力类型&gt;(context, 目标, 层数, 来源, 来源卡牌);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 抽牌</span></span><br><span class="line"><span class="keyword">await</span> CardPileCmd.Draw(context, 数量, Owner);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获得格挡</span></span><br><span class="line"><span class="keyword">await</span> CreatureCmd.GainBlock(目标, 数值, ValueProp.Unpowered, <span class="literal">null</span>, fast: <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 触发动画（怪物）</span></span><br><span class="line"><span class="keyword">await</span> CreatureCmd.TriggerAnim(对象, <span class="string">&quot;动画名&quot;</span>, 延迟);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加卡牌到手牌</span></span><br><span class="line"><span class="keyword">await</span> CardCmd.AddToHand(context, 卡牌实例, 目标玩家);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="6-总结：制作一张卡牌的完整流程"><a href="#6-总结：制作一张卡牌的完整流程" class="headerlink" title="6. 总结：制作一张卡牌的完整流程"></a>6. 总结：制作一张卡牌的完整流程</h2><ol>
+<li><strong>编码</strong>：创建 <code>CardModel</code> 子类，定义动态变量、构造函数、<code>OnPlay</code> 和 <code>OnUpgrade</code>。</li>
+<li><strong>本地化</strong>：在 <code>cards.json</code> 添加标题与描述。</li>
+<li><strong>图片</strong>：准备 PNG 和对应的 <code>.tres</code> 文件（放在正确的卡池目录）。</li>
+<li><strong>注册</strong>：在 <code>ModInitializer</code> 中添加到卡池。</li>
+<li><strong>测试</strong>：编译打包，进入游戏验证。</li>
+</ol>
+<hr>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://www.leidaxiannb.cloudns.ch">雷大仙</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://www.leidaxiannb.cloudns.ch/2026/08/02/Slay_Mod/">https://www.leidaxiannb.cloudns.ch/2026/08/02/Slay_Mod/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9D%80%E6%88%AE%E5%B0%96%E5%A1%942/">杀戮尖塔2</a><a class="post-meta__tags" href="/tags/%E6%A8%A1%E7%BB%84%E5%BC%80%E5%8F%91/">模组开发</a></div><div class="post_share"><div class="social-share" data-image="/img/covers/cover-11.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/10/18/website-intro/" title="关于这个博客"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/covers/cover-00.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">关于这个博客</div></div></a></div><div class="next-post pull-right"><a href="/2025/09/02/desktop_pet/" title="丛雨桌宠物"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/covers/cover-19.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">丛雨桌宠物</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://leidaxian-images.pages.dev/file/44aabeb026c8e50d3b52e.gif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">雷大仙</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/leidaixianNB"><i class="fab fa-github"></i><span>我的github</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/leidaxianNB" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="/1456367126@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来到我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9D%80%E6%88%AE%E5%B0%96%E5%A1%942-%E6%A8%A1%E7%BB%84%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0-%E2%80%94%E2%80%94-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8D%A1%E7%89%8C"><span class="toc-number">1.</span> <span class="toc-text">杀戮尖塔2 模组开发笔记 —— 自定义卡牌</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-number">1.1.</span> <span class="toc-text">1. 环境准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 开发工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2 项目结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E5%BC%95%E7%94%A8%E4%BE%9D%E8%B5%96"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.3 引用依赖</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8D%A1%E7%89%8C%E5%88%B6%E4%BD%9C%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.2.</span> <span class="toc-text">2. 卡牌制作步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%AE%9A%E4%B9%89%E5%8D%A1%E7%89%8C%E7%B1%BB"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 定义卡牌类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B1%EF%BC%9A%E6%94%BB%E5%87%BB%E7%89%8C%EF%BC%88%E9%80%A0%E6%88%90%E4%BC%A4%E5%AE%B3%E5%B9%B6%E6%8A%BD%E7%89%8C%EF%BC%89"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">示例1：攻击牌（造成伤害并抽牌）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B2%EF%BC%9A%E8%83%BD%E5%8A%9B%E7%89%8C-Buff%EF%BC%88%E6%AF%8F%E6%8A%BD%E4%B8%80%E5%BC%A0%E7%89%8C%E5%8A%A0%E5%8A%9B%E9%87%8F%EF%BC%89"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">示例2：能力牌 + Buff（每抽一张牌加力量）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%9C%AC%E5%9C%B0%E5%8C%96"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 本地化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%8D%A1%E7%89%8C%E5%9B%BE%E6%A0%87"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.3 卡牌图标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E6%B3%A8%E5%86%8C%E5%8D%A1%E7%89%8C"><span class="toc-number">1.2.4.</span> <span class="toc-text">2.4 注册卡牌</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%85%B3%E9%94%AE%E6%98%93%E9%94%99%E7%82%B9%EF%BC%88%E9%81%BF%E5%9D%91%E6%8C%87%E5%8D%97%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">3. 关键易错点（避坑指南）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%B5%8B%E8%AF%95%E4%B8%8E%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7"><span class="toc-number">1.4.</span> <span class="toc-text">4. 测试与调试技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5"><span class="toc-number">1.5.</span> <span class="toc-text">5. 常用命令速查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%80%BB%E7%BB%93%EF%BC%9A%E5%88%B6%E4%BD%9C%E4%B8%80%E5%BC%A0%E5%8D%A1%E7%89%8C%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B"><span class="toc-number">1.6.</span> <span class="toc-text">6. 总结：制作一张卡牌的完整流程</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/10/18/waline-comments/" title="博客接入Waline评论系统"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/covers/cover-43.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="博客接入Waline评论系统"/></a><div class="content"><a class="title" href="/2026/10/18/waline-comments/" title="博客接入Waline评论系统">博客接入Waline评论系统</a><time datetime="2026-10-17T16:00:00.000Z" title="Created 2026-10-18 00:00:00">2026-10-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/10/18/website-intro/" title="关于这个博客"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/covers/cover-00.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于这个博客"/></a><div class="content"><a class="title" href="/2026/10/18/website-intro/" title="关于这个博客">关于这个博客</a><time datetime="2026-10-17T16:00:00.000Z" title="Created 2026-10-18 00:00:00">2026-10-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/08/02/Slay_Mod/" title="杀戮尖塔2 模组开发笔记 —— 自定义卡牌"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/covers/cover-11.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="杀戮尖塔2 模组开发笔记 —— 自定义卡牌"/></a><div class="content"><a class="title" href="/2026/08/02/Slay_Mod/" title="杀戮尖塔2 模组开发笔记 —— 自定义卡牌">杀戮尖塔2 模组开发笔记 —— 自定义卡牌</a><time datetime="2026-08-02T15:41:55.000Z" title="Created 2026-08-02 23:41:55">2026-08-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/02/desktop_pet/" title="丛雨桌宠物"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/covers/cover-19.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="丛雨桌宠物"/></a><div class="content"><a class="title" href="/2025/09/02/desktop_pet/" title="丛雨桌宠物">丛雨桌宠物</a><time datetime="2025-09-01T18:40:40.656Z" title="Created 2025-09-02 02:40:40">2025-09-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/27/baidu/" title="百度网盘OpenSpeedy破解"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/covers/cover-16.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="百度网盘OpenSpeedy破解"/></a><div class="content"><a class="title" href="/2025/06/27/baidu/" title="百度网盘OpenSpeedy破解">百度网盘OpenSpeedy破解</a><time datetime="2025-06-26T17:55:55.752Z" title="Created 2025-06-27 01:55:55">2025-06-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2026 By 雷大仙</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"><span id="percent"> <span>0</span><span>%</span></span></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+
+  const initWaline = (Fn) => {
+    const waline = Fn(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://comment.leidaxiannb.cloudns.ch',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: true,
+    }, null))
+
+    const destroyWaline = () => {
+      waline.destroy()
+    }
+
+    btf.addGlobalFn('pjax', destroyWaline, 'destroyWaline')
+  }
+
+  const loadWaline = async () => {
+    if (initFn) initWaline(initFn)
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+      const { init } = await import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js')
+      initFn = init || Waline.init
+      initWaline(initFn)
+      window.walineFn = initFn
+    }
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script defer src="/js/cursor.js"></script><script>window.meting_api='https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&r=:r';</script><div class="aplayer no-destroy" data-id="5345621849" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true" > </div><script defer data-pjax src="/js/readPercent.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="30" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":200,"height":350},"mobile":{"show":true},"log":false});</script></body></html>
